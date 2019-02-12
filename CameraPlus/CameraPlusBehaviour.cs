@@ -56,6 +56,7 @@ namespace CameraPlus
         protected bool _thirdPerson;
         public Vector3 ThirdPersonPos;
         public Vector3 ThirdPersonRot;
+        public Vector3 FirstPersonOffset;
         public Config Config;
 
         protected RenderTexture _camRenderTexture;
@@ -197,6 +198,8 @@ namespace CameraPlus
                 _cameraCube.eulerAngles = ThirdPersonRot;
             }
 
+            FirstPersonOffset = Config.FirstPersonPositionOffset;
+
             SceneManager_activeSceneChanged(new Scene(), new Scene());
             Plugin.Log($"Camera \"{Path.GetFileName(Config.FilePath)} successfully initialized!\"");
         }
@@ -231,11 +234,13 @@ namespace CameraPlus
             {
                 transform.position = _mainCamera.transform.position;
                 transform.rotation = _mainCamera.transform.rotation;
+
             }
             else
             {
                 ThirdPersonPos = Config.Position;
                 ThirdPersonRot = Config.Rotation;
+                FirstPersonOffset = Config.FirstPersonPositionOffset;
             }
             
             CreateScreenRenderTexture();
@@ -343,6 +348,7 @@ namespace CameraPlus
                     {
                         transform.position = _mainCamera.transform.position;
                         transform.rotation = _mainCamera.transform.rotation;
+                        FirstPersonOffset = Config.FirstPersonPositionOffset;
                     }
                     else
                     {
@@ -372,7 +378,7 @@ namespace CameraPlus
                     return;
                 }
 
-                transform.position = Vector3.Lerp(transform.position, camera.position,
+                transform.position = Vector3.Lerp(transform.position, camera.position + FirstPersonOffset,
                     Config.positionSmooth * Time.unscaledDeltaTime);
 
                 transform.rotation = Quaternion.Slerp(transform.rotation, camera.rotation,
@@ -676,6 +682,7 @@ namespace CameraPlus
                 ThirdPerson = Config.thirdPerson;
                 ThirdPersonPos = Config.Position;
                 ThirdPersonRot = Config.Rotation;
+                FirstPersonOffset = Config.FirstPersonPositionOffset;
                 CreateScreenRenderTexture();
                 CloseContextMenu();
                 Config.Save();
@@ -696,8 +703,10 @@ namespace CameraPlus
                 {
                     Config.Position = Config.DefaultPosition;
                     Config.Rotation = Config.DefaultRotation;
+                    Config.FirstPersonPositionOffset = Config.DefaultFirstPersonPositionOffset;
                     ThirdPersonPos = Config.DefaultPosition;
                     ThirdPersonRot = Config.DefaultRotation;
+                    FirstPersonOffset = Config.FirstPersonPositionOffset;
                     Config.Save();
                     CloseContextMenu();
                 });
