@@ -24,6 +24,10 @@ namespace CameraPlus
         public float angy;
         public float angz;
 
+        public float firstPersonPosOffsetX;
+        public float firstPersonPosOffsetY;
+        public float firstPersonPosOffsetZ;
+
         public int screenWidth = Screen.width;
         public int screenHeight = Screen.height;
         public int screenPosX;
@@ -98,6 +102,28 @@ namespace CameraPlus
             get
             {
                 return new Vector3(15f, 0f, 0f);
+            }
+        }
+
+        public Vector3 FirstPersonPositionOffset
+        {
+            get
+            {
+                return new Vector3(firstPersonPosOffsetX, firstPersonPosOffsetY, firstPersonPosOffsetZ);
+            }
+            set
+            {
+                firstPersonPosOffsetX = value.x;
+                firstPersonPosOffsetY = value.y;
+                firstPersonPosOffsetZ = value.z;
+            }
+        }
+
+        public Vector3 DefaultFirstPersonPositionOffset
+        {
+            get
+            {
+                return new Vector3(0, 0, 0);
             }
         }
 
