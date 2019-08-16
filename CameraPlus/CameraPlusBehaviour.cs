@@ -333,6 +333,20 @@ namespace CameraPlus
             if (_moverPointer) Destroy(_moverPointer);
             _moverPointer = pointer.gameObject.AddComponent<CameraMoverPointer>();
             _moverPointer.Init(this, _cameraCube);
+
+            if (Config.thirdInMenuFirstInGame)
+            {
+                if (to.name == "GameCore")
+                {
+                    Config.thirdPerson = false;
+                }
+                else
+                {
+                    Config.thirdPerson = true;
+                }
+            }
+
+            ReadConfig();
         }
 
         [DllImport("user32.dll")]
