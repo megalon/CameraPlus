@@ -24,6 +24,13 @@ namespace CameraPlus
             DiagonalLeft,
             DiagonalRight
         }
+
+        public enum CameraSceneSwitchStateType
+        {
+            None,
+            SwitchToThirdInGame,
+            SwitchToFirstInGame
+        }
         
         protected readonly WaitUntil _waitForMainCamera = new WaitUntil(() => Camera.main);
         private readonly WaitForSecondsRealtime _waitForSecondsRealtime = new WaitForSecondsRealtime(1f);
@@ -334,7 +341,18 @@ namespace CameraPlus
             _moverPointer = pointer.gameObject.AddComponent<CameraMoverPointer>();
             _moverPointer.Init(this, _cameraCube);
 
-            if (Config.thirdInMenuFirstInGame)
+            if (Config.cameraSceneSwitchType == (int)CameraSceneSwitchStateType.SwitchToThirdInGame) 
+            {
+                if (to.name == "GameCore")
+                {
+                    Config.thirdPerson = true;
+                }
+                else
+                {
+                    Config.thirdPerson = false;
+                }
+            }
+            else if (Config.cameraSceneSwitchType == (int)CameraSceneSwitchStateType.SwitchToFirstInGame)
             {
                 if (to.name == "GameCore")
                 {

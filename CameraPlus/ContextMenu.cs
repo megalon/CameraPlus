@@ -151,13 +151,13 @@ namespace CameraPlus
                         parentBehaviour.CloseContextMenu();
                         parentBehaviour.Config.Save();
                     }
-                    if (GUI.Button(new Rect(menuPos.x, menuPos.y + 185, 300, 30), new GUIContent(parentBehaviour.Config.thirdInMenuFirstInGame ? "Disable First Person swap" : "Swap to First Person in song")))
+                    /*if (GUI.Button(new Rect(menuPos.x, menuPos.y + 185, 300, 30), new GUIContent(parentBehaviour.Config.cameraSceneSwitchType ? "Disable First Person swap" : "Swap to First Person in song")))
                     {
-                        parentBehaviour.Config.thirdInMenuFirstInGame = !parentBehaviour.Config.thirdInMenuFirstInGame;
+                        parentBehaviour.Config.cameraSceneSwitchType = !parentBehaviour.Config.cameraSceneSwitchType;
                         CameraUtilities.ReloadCameras();
                         parentBehaviour.CloseContextMenu();
                         parentBehaviour.Config.Save();
-                    }
+                    }*/
                     if (GUI.Button(new Rect(menuPos.x, menuPos.y + 225, 300, 30), new GUIContent("Close Menu")))
                     {
                         parentBehaviour.CloseContextMenu();

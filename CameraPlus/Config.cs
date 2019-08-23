@@ -15,7 +15,7 @@ namespace CameraPlus
 
         public bool thirdPerson = false;
         public bool showThirdPersonCamera = true;
-        public bool thirdInMenuFirstInGame = false;
+        public int cameraSceneSwitchType = 0;
 
         public float posx;
         public float posy = 2;
