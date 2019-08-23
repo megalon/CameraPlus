@@ -151,13 +151,27 @@ namespace CameraPlus
                         parentBehaviour.CloseContextMenu();
                         parentBehaviour.Config.Save();
                     }
-                    /*if (GUI.Button(new Rect(menuPos.x, menuPos.y + 185, 300, 30), new GUIContent(parentBehaviour.Config.cameraSceneSwitchType ? "Disable First Person swap" : "Swap to First Person in song")))
+
+                    string CameraSceneSwitchStateTypeString = "Switch to Third Person in game";
+                    if (parentBehaviour.Config.cameraSceneSwitchType == (int)CameraPlusBehaviour.CameraSceneSwitchStateType.SwitchToThirdInGame){
+                        CameraSceneSwitchStateTypeString = "Switch First Person in game";
+                    } else if (parentBehaviour.Config.cameraSceneSwitchType == (int)CameraPlusBehaviour.CameraSceneSwitchStateType.SwitchToFirstInGame) {
+                        CameraSceneSwitchStateTypeString = "Disable camera swap";
+                    }
+
+                    if (GUI.Button(new Rect(menuPos.x, menuPos.y + 185, 300, 30), new GUIContent(CameraSceneSwitchStateTypeString)))
                     {
-                        parentBehaviour.Config.cameraSceneSwitchType = !parentBehaviour.Config.cameraSceneSwitchType;
+                        if(parentBehaviour.Config.cameraSceneSwitchType < Enum.GetValues(typeof(CameraPlusBehaviour.CameraSceneSwitchStateType)).Cast<int>().Max())
+                        {
+                            parentBehaviour.Config.cameraSceneSwitchType++;
+                        } else
+                        {
+                            parentBehaviour.Config.cameraSceneSwitchType = 0;
+                        }
                         CameraUtilities.ReloadCameras();
                         parentBehaviour.CloseContextMenu();
                         parentBehaviour.Config.Save();
-                    }*/
+                    }
                     if (GUI.Button(new Rect(menuPos.x, menuPos.y + 225, 300, 30), new GUIContent("Close Menu")))
                     {
                         parentBehaviour.CloseContextMenu();
