@@ -161,7 +161,8 @@ namespace CameraPlus
 
                     if (GUI.Button(new Rect(menuPos.x, menuPos.y + 185, 300, 30), new GUIContent(CameraSceneSwitchStateTypeString)))
                     {
-                        if(parentBehaviour.Config.cameraSceneSwitchType < Enum.GetValues(typeof(CameraPlusBehaviour.CameraSceneSwitchStateType)).Cast<int>().Max())
+                        // https://stackoverflow.com/questions/203377/getting-the-max-value-of-an-enum#203389
+                        if (parentBehaviour.Config.cameraSceneSwitchType < Enum.GetValues(typeof(CameraPlusBehaviour.CameraSceneSwitchStateType)).Cast<int>().Max())
                         {
                             parentBehaviour.Config.cameraSceneSwitchType++;
                         } else
